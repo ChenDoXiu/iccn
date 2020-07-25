@@ -1,0 +1,200 @@
+{extend name="base/base" /}
+{block name="title"}
+后台-首页
+{/block}
+{block name="body"}
+ <div class="row">
+      <div class="col-md-6 col-xl-3">
+        <div class="bg-info card text-white p-3">
+          <div class="row">
+            <div class="col-6">
+              <div>
+                <span class="oi oi-data-transfer-download"></span>
+                今日下载次数
+              </div>
+              <div class="display-5">
+                1.2k
+              </div>
+            </div>
+            <div class="col-6">
+              <div>
+                <span class="oi oi-data-transfer-download"></span>
+                总下载次数
+              </div>
+              <div class="display-5">
+                11.2k
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-6 col-xl-3">
+
+        <div class="bg-warning card text-white p-3">
+          <div class="row">
+            <div class="col-6">
+              <div>
+                <span class="oi oi-globe"></span>
+                今日浏览次数
+              </div>
+              <div class="display-5">
+                1.2k
+              </div>
+            </div>
+            <div class="col-6">
+              <div>
+                <span class="oi oi-globe"></span>
+                总浏览次数
+              </div>
+              <div class="display-5">
+                11.2k
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-6 col-xl-3">
+
+        <div class="bg-success card text-white p-3">
+          <div class="row">
+            <div class="col-6">
+              <div>
+                <span class="oi oi-person"></span>
+                今日访问人数
+              </div>
+              <div class="display-5">
+                1.2k
+              </div>
+            </div>
+            <div class="col-6">
+              <div>
+                <span class="oi oi-person"></span>
+
+                总访问人数
+              </div>
+              <div class="display-5">
+                11.2k
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-6 col-xl-3">
+
+        <div class="bg-danger card text-white p-3">
+          <div class="row">
+            <div class="col-6">
+              <div>
+                <span class="oi oi-people"></span>
+                今日新增用户
+              </div>
+              <div class="display-5">
+                1.2k
+              </div>
+            </div>
+            <div class="col-6">
+              <div>
+
+                <span class="oi oi-people"></span>
+                总用户
+              </div>
+              <div class="display-5">
+                11.2k
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header" data-toggle="collapse" data-target="#gl">
+            概览
+          </div>
+          <div id='gl' class="collapse card-body show">
+            <span class="oi oi-puzzle-piece text-muted"><a href="#"> MODS(100)</a></span>
+            <span class="oi oi-document text-muted"><a href="#"> 文章(100)</a></span>
+            <span class="oi oi-comment-square text-muted"><a href="#"> 评论(100)</a></span>
+
+
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header" data-toggle="collapse" data-target="#zj">
+            最近发生
+          </div>
+          <div id='zj' class="collapse card-bodyi show">
+            <ul class="nav nav-tabs">
+              <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#newwz">最新文章</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#newmod">最新mod</a>
+              </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content tabbox">
+              <div class="tab-pane active container" id="newwz">
+                <ul>
+                  <li>
+                    <div class="time"> PM12:30 10-03</div>
+                    <div class="text">一个测试文章</div>
+                  </li>
+                  <li>
+                    <div class="time">PM12:43 10-03</div>
+                    <div class="text">测试文章K</div>
+                  </li>
+                  <li> 
+                    <div class="time">PM10:56 10-03</div>
+                    <div class="text">textsshsievse</div>
+                  </li>
+                </ul>
+              </div>
+              <div class="tab-pane container" id="newmod">
+                <ul>
+                  <li>
+                    <div class="icon"><img src="../imges/photo.png" alt=""></div>
+                    <div class="info">
+                      <div class="title">Test Mods</div>
+                      <div class="text"> This Is A Testtest test test sbshshshshsjwjwuwjsjshh </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="icon"><img src="../imges/photo.png" alt=""></div>
+                    <div class="info">
+                      <div class="title">Test Mods</div>
+                      <div class="text"> This Is A Test Mods</div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="icon"><img src="../imges/photo.png" alt=""></div>
+                    <div class="info">
+                      <div class="title">Test Mods</div>
+                      <div class="text"> This Is A Test Mods</div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="icon"><img src="../imges/photo.png" alt=""></div>
+                    <div class="info">
+                      <div class="title">Test Mods</div>
+                      <div class="text"> This Is A Test Mods</div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+{/block}

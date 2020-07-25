@@ -1,0 +1,69 @@
+{extend name="base/base"/}
+{block name="title"}
+后台-历史版本
+{/block}
+{block name="css"}
+<link rel="stylesheet" href="/static/ad_static/css/mod-all.css" type="text/css" media="screen" title="no title" charset="utf-8">
+{/block}
+{block name="body"}
+      <ol class="breadcrumb box p-3">
+        <li class="breadcrumb-item"><a href="{:url("index")}"><所有模组</a></li>
+      </ol>
+   
+      <div class="card">
+        <ul class="list list-group">
+      
+        
+       {volist name="$res" id="art"}
+         <li class="list-group-item">
+            <div class="row">
+              <div class="icon">
+                <img src="{$art.icon}" alt=""/>
+              </div>
+              <div class="row col"> 
+                <div class="col-md-4"><b class="text-info">[ {$art.plateinfo.name} ] </b> {$art.name}<span class="text-success"> v{$art.version}</span></div>
+                 <div class="col-md-4 text-muted">{$art.time} {$art.userinfo.name} 发布</div>
+                <div class="col-md-4">
+                  <!-- <a href="#">编辑</a> -->
+                  <!-- <a href="">移动</a> -->
+                  <a href="{:url('index/index/mod',["id" => $art.id])}">查看</a>
+                  <a hrefq="{:url('',['id' => $art.id])}" onclick="$('#dellink').attr('href','{:url('delver',['id' => $art.id])}');" class="text-danger" data-toggle="modal" data-target="#del">删除</a>
+                </div>
+              </div>
+            </div>
+          </li>  
+          {/volist}
+          
+        </ul>
+      </div>
+      <div>
+      </div> 
+      </div>
+     <!-- 模态框 -->
+<div class="modal fade" id="del">
+  <div class="modal-dialog">
+    <div class="modal-content">
+ 
+      <!-- 模态框头部 -->
+      <div class="modal-header">
+        <h4 class="modal-title">警告⚠</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+ 
+      <!-- 模态框主体 -->
+      <div class="modal-body">
+        确定删除吗？此操作无法恢复<br/>
+        此操作将会删除此版本
+      </div>
+ 
+      <!-- 模态框底部 -->
+      <div class="modal-footer">
+        <a href="" id="dellink"class="btn text-white btn-danger">确定删除</a>
+        <button type="button" class="btn btn-info" data-dismiss="modal">手滑了</button>
+      </div>
+ 
+    </div>
+  </div>
+</div>
+      
+{/block}

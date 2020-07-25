@@ -1,0 +1,96 @@
+{extend name="base/base"/}
+{block name="title"}
+后台-发布文章
+{/block}
+{block name="css"}
+<link rel="stylesheet" href="/static/ad_static/css/article-rel.css" type="text/css" media="screen" title="no title" charset="utf-8">
+{/block}
+{block name="body"}
+<h3>
+  编辑 - {:full("title")}
+</h3>
+<form action="{:url('update',['id'=>full('id')])}" method="post" enctype="multipart/form-data">
+  <div class="row">
+    <div class="col-md-8 p3">
+      <div class="card">
+        <div class="card-header" data-toggle="collapse" data-target="#title">
+          标题
+        </div>
+        <div id='title' class="collapse card-body show">
+          <div class="form-group"> 
+            <label for="title-val">标题</label> 
+            <input type="text" autocomplete="off" required  name="title" id="title-val" value='{:full("title")}' placeholder="请填写标题" class="form-control" >
+          </div>
+        </div>
+      </div>
+      <textarea name="con" id="textarea" class="textarea">
+     {:full("con")}
+      </textarea>
+    </div>
+    <div class="col-md-4">
+
+
+      <div class="card">
+        <div class="card-header" data-toggle="collapse" data-target="#option">
+          发布选项
+        </div>
+        <div id="option" class="collapse card-body show">
+
+
+          <div class="form-group"> 
+            <label for="permiss">查看权限</label>
+            <select name="permiss" id="permiss" class="form-control">
+              {volist name="$auth_list" id="val"}
+              <option value="{$val.id}"  {if condition="full('permiss') == $val.id"}selected{/if}>{$val.title}</option>
+              {/volist}
+            </select>
+          </div>
+
+          <div class="form-group"> 
+            <label for="plate">版块</label>
+            <select name="plate" id="permiss" class="form-control">
+              {volist name="$plate_list" id="val"}
+              <option value="{$val.id}" {if condition="full('plate') == $val.id"}selected{/if} >{$val.name}</option>
+              {/volist}
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="pw">密码保护</label>
+            <input type="text" id="pw"  name="pw" placeholder="留空则不设置密码" class="form-control" pattern="[0-9a-zA-Z]{4,15}" value='{:full("pw")}' autocomplete="off">
+          </div>
+
+          <div class="pt-3">
+            <!--   <button  class="btn btn-primary" type="submit" name="submit" value="draf" > -->
+            <!--     草稿箱 -->
+            <!--   </button> -->
+            <button type="submit" name="submit" value="rel" class="btn btn-info">保存更新</button>
+            <a class="btn" href="{:url("index")}">取消</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header" data-toggle="collapse"  data-target="#info">
+          其他信息
+        </div>
+        <div id="info" class="collapse card-body show">
+
+
+          <div class="form-group"> 
+            <label for="absrtact">摘要(可选)</label>
+            <textarea type="text" name="absrtact" id="absrtact"  class="form-control" placeholder="留空则会自动对文章进行摘要" rows="4" autocomplete="off">{:full("absrtact")}</textarea>
+          </div>
+          <div class="form-group">
+          </div>
+          <label>文章封面</label>
+          <div class="custom-file">
+            <input type="file" name="cover" accept="image/png,image/jpeg,image/gif">
+            
+          </div>
+          <img width="100%" src="{:full('cover')}">
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+{/block}

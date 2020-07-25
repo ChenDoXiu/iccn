@@ -1,0 +1,108 @@
+{extend name="base/base"/}
+{block name="title"}
+后台-发布模组
+{/block}
+{block name="css"}
+{/block}
+{block name="body"}
+      <h3>
+        模组发布
+      </h3>
+     <form action="{:url('save')}" method="post" enctype="multipart/form-data">
+      <div class="row">
+        <div class="col-md-8 p3">
+          <div class="card">
+            <div class="card-header" data-toggle="collapse" data-target="#modinfo">
+              模组信息
+            </div>
+            <div id='modinfo' class="collapse card-body show">
+              <div class="form-group"> 
+                <label for="name">模组名称  </label> 
+                <input type="text" name="name" id="name" value='{:full("name")}' placeholder="格式：中文名称-英文名称" class="form-control" required autocomplete="off">
+              </div>
+              <div class="form-group"> 
+                <label for="version">版本号</label> 
+                <input type="text" name="version" id="version" value='{:full("version")}'  placeholder="格式：1.1.0" class="form-control" required autocomplete="off">
+              </div>
+               <div class="form-group"> 
+                <label for="iden">mod标识，用于版本更新(相同的标识被认为是同一个模组)</label> 
+                <input type="text" name="iden" id="iden" value='{:full("iden")}'  placeholder="只能是英文和数字，4-255字符" class="form-control" required autocomplete="off">
+              </div>
+              <div class="form-group"> 
+                <label for="pic">截图<i>(多选)</i></label> 
+                <input type="file" name="pic[]" class="form-check" accept="image/*" required multiple>
+                
+              </div>
+              <div class="form-group"> 
+                <label for="mod">模组文件<i>(zip格式)</i></label> 
+                <input type="file" name="mod" id="mod" class="form-check" required>
+              </div>
+            </div>
+          </div>
+              <textarea name="desc" id="textarea" class="textarea">{:full("desc")}</textarea>
+        </div>
+        <div class="col-md-4">
+
+
+          <div class="card">
+            <div class="card-header" data-toggle="collapse" data-target="#option">
+              发布选项
+            </div>
+            <div id="option" class="collapse card-body show">
+
+
+                <div class="form-group"> 
+                  <label for="permiss">查看权限</label>
+                  <select name="permiss" id="permiss" class="form-control">
+                  {volist name="$auth_list" id="val"}
+                <option value="{$val.id}"  {if condition="full('permiss') == $val.id"}selected{/if} >{$val.title}</option>
+              {/volist}
+                  </select>
+                </div>
+
+                <div class="form-group"> 
+                  <label for="plate">板块</label>
+                  <select name="plate" id="plate" class="form-control">
+                   {volist name="$plate_list" id="val"}
+                <option value="{$val.id}"  {if condition="full('plate') == $val.id"}selected{/if} >{$val.name}</option>
+              {/volist}
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="pass">密码保护</label>
+                  <input type="text" id="pass" name="pass" placeholder="留空则不设置密码" class="form-control" pattern="[0-9a-zA-Z]{4,20}" value='{:full("pass")}'>
+                </div>
+
+              
+                <div class="pt-3">
+            <button type="submit" name="submit" value="rel" class="btn btn-info">发布</button>
+                </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header" data-toggle="collapse"  data-target="#info">
+              其他信息
+            </div>
+            <div id="info" class="collapse card-body show">
+
+
+                <div class="form-group"> 
+                  <label for="absrtact">摘要(可选)</label>
+                  <textarea type="text" name="absrtact" id="absrtact"  class="form-control" placeholder="留空则系统自动生成" rows="4" autocomplete="off">{:full("absrtact")}</textarea>
+                </div>
+                <div class="form-group">
+                  <label for="icon">图标</label>
+                  <input type="file" class="form-control"  name="icon" id="icon" value="" accept="image/png,image/jpeg,image/gif" required>
+                </div>
+
+                <div class="form-group"> 
+                  <label for="copyright">版权信息(搬运或汉化的模组请填写原地址)</label>
+                  <input type="text" name="copyright" id="copyright"  class="form-control" placeholder="原地址，例如 http://www.baidu.com" value='{:full("copyright")}' autocomplete="off">
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </form>
+{/block}

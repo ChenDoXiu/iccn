@@ -1,0 +1,24 @@
+ {extend name="base/base" /}
+{block name="title"}
+系统-META设置
+{/block}
+{block name="body"}
+<form method="post">
+ <h3>
+        META标记
+      </h3>
+      <div class="box">
+        <div class="form-group">
+
+          <label>Description(网站描述)</label>
+          <textarea name="desc" rows="3" class="form-control">{$desc}</textarea>
+        </div>
+        <div class="form-group">
+
+          <label>Keywords(关键词)</label>
+          <textarea name="key" rows="3" class="form-control">{$key}</textarea>
+        </div>
+        <button type="submit" name="submit" class="btn btn-primary">提交</button>
+      </div>
+      </form>
+      {/block}

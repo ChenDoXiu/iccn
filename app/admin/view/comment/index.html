@@ -1,0 +1,74 @@
+{extend name="base/base"/}
+{block name="title"}
+后台-所有评论
+{/block}
+{block name="css"}
+<link rel="stylesheet" href="/static/ad_static/css/comment.css" type="text/css" media="screen" title="no title" charset="utf-8">
+{/block}
+{block name="body"}
+<h3> 所有评论 </h3>
+
+
+
+<div class="card">
+  <ul class="list-group list">
+    {volist name="comments" id="val"}
+    <li class="list-group-item">
+      <div class="row">
+        <div class="col-md-4 row user">
+          <div class="icon">
+            <img src="{$val.user.photo}" alt="">
+          </div>
+          <div class="col"> 
+            <div class="name">{$val.user.name} </div>
+
+            <div class="mail">{$val.user.mail}</div>
+          </div>
+        </div>
+
+        <div class="col-md-8">
+          <div class="con">
+            {$val.date} 回复于 {if condition="$val['con']['type'] == 1"}<a href="{:url('index/index/mod',['id' => $val.con.id])}">{$val.con.name}</a>{else/}<a href="{:url('index/index/article',['id' => $val.con.id])}">{$val.con.title}</a>{/if}<br/>
+            {$val.text}
+          </div>
+          <div class="cmd mt-2">
+            <a href=" {if condition="$val['type'] == 1"}{:url('index/index/mod',['id' => $val.con.id,'com' => $val.id])}#comment{else/}{:url('index/index/article',['id' => $val.con.id,'com'=>$val.id])}#comment{/if}">回复</a>
+            <a onclick="$('#dellink').attr('href','{:url('delete',['id' => $val.id])}');" class="text-danger" data-toggle="modal" data-target="#del">删除</a>
+          </div>
+        </div>   
+      </div>
+    </li>           
+    {/volist}
+
+  </ul>
+</div>
+</div>
+
+<div class="modal fade" id="del">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- 模态框头部 -->
+      <div class="modal-header">
+        <h4 class="modal-title">警告⚠</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- 模态框主体 -->
+      <div class="modal-body">
+        确定删除吗？<br/>
+        此操作将会删除此评论，并且无法恢复
+      </div>
+
+      <!-- 模态框底部 -->
+      <div class="modal-footer">
+        <a href="" id="dellink"class="btn text-white btn-danger">确定删除</a>
+        <button type="button" class="btn btn-info" data-dismiss="modal">手滑了</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+{/block}

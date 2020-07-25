@@ -1,0 +1,53 @@
+{extend name="base/base" /}
+{block name="style"}<link rel="stylesheet" href="/static/css/list.css" type="text/css"> {/block}
+{block name="title"}{$plate.name}{/block}
+{block name="body"}
+
+
+    <div class="head"style=" background-image:url(/static/imges/bg1.jpg)" >
+        <div class="con" >
+            <h1 class="title">{$plate.name}</h1>
+            <div class="info">{$plate.desc}</div>
+        </div>
+    </div>
+
+    <div class=" container pt-2">
+      <ol class="breadcrumb box">
+        <li class="breadcrumb-item"><a href="{:url("index/index/home")}">首页</a></li>
+        <li class="breadcrumb-item active">{$plate.name}</li>
+      </ol>
+    </div>
+
+
+   <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+
+          <div class="article">
+          {volist name="art" id="val"}
+            <div class="article-box">
+            
+              <a class="article-block" href="{:url('index/index/article',['id' => $val.id])}">
+                <div class="icon">
+                  <img src="{$val.cover}" alt=""/>
+                </div>
+                <div class="info">
+                  <div class="title">{$val.title}</div>
+                  <div class="con">{$val.absrtact}</div>
+                </div>
+              </a>
+              
+            </div>
+           {/volist}
+          </div>
+
+
+         {$page}
+         
+               </div>
+      </div> 
+    </div>
+
+
+
+{/block}

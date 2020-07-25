@@ -1,0 +1,38 @@
+{extend name="base/base" /}
+{block name="title"}注册账户{/block}
+{block name="style"}    <link rel="stylesheet" href="css/login.css" type="text/css" media="screen" title="no title"
+        charset="utf-8"> {/block}
+{block name="body"}
+ <div class=" container pt-2">
+      <ol class="breadcrumb box">
+        <li class="breadcrumb-item">首页</li>
+        <li class="breadcrumb-item active">注册</li>
+      </ol>
+    </div>
+    
+    
+      <div class="container">
+        <div class="box">
+          <h1>注册-成为开发者！</h1> 
+          <div class="login">
+            <form method="post" action="{:url("index/regist/mail")}">  
+            
+              <div class="form-group">
+                <label for="mail">请输入你的邮箱:</label>
+                <input type="text" name="mail" class="form-control" id="mail" required>
+              </div>
+             
+              {:token_field()}
+                <br>
+              <div class="form-group">
+                <button type="submit" name="submit" class="btn btn-primary w-100">下一步</button>
+              </div>
+            </form>
+           已有开发者账号？点击这里<a href="{:url("index/login/admin")}">登录</a>
+          </div>
+        </div>
+      </div>
+
+    
+    
+{/block}

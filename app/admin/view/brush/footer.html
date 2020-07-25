@@ -1,0 +1,19 @@
+{extend name="base/base" /}
+{block name="title"}
+前台-页脚
+{/block}
+{block name="body"}
+<form method="post" action="{:url('savefooter')}">
+<h3>
+        页脚
+      </h3>
+      <div class="box">
+        <div class="form-group">
+
+          <label>主体</label>
+          <textarea name="text" rows="7" class="form-control">{$text}</textarea>
+        </div>
+        <button type="submit" name="submit" class="btn btn-primary">提交</button>
+      </div>
+      </form>
+      {/block}

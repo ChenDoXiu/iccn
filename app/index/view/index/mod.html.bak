@@ -1,0 +1,167 @@
+{extend name="base/base" /}
+{block name="title"}首页{/block}
+{block name="style"}<link rel="stylesheet" href="/static/css/mods.css" type="text/css" charset="utf-8">{/block}
+{block name="body"}
+
+    <div class=" container pt-2">
+      <ol class="breadcrumb box">
+        <li class="breadcrumb-item"><a href="{:url("home")}">首页</a></li>
+         <li class="breadcrumb-item"><a href="{:url("home")}">{$moddata.plateinfo.name}</a></li>
+        <li class="breadcrumb-item active">{$moddata["name"]}</li>
+      </ol>
+    </div>
+
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="box">
+            <div class="header">
+
+              <div class="icon"><img src="{$moddata["icon"]}" alt="logo"></div>
+              <div class="info">
+                <div class="title">{$moddata["name"]}</div>
+                <div class="com">{$moddata.userinfo.name}</div>
+                <div class="version">v{$moddata["version"]}{if condition="isset($has_new)"}(此版本为旧版，<a href="{:url("mod",["id" => $has_new])}">新版链接</a>){/if}</div>
+              </div>
+            </div>
+            <button type="button" class="btn w-100  btn-primary">Download</button>
+            <div class="preview">
+              <?php $pic = $moddata["pic"];?>
+              <?php foreach($pic as $val){?>
+                 <img src="{$val}" alt=""/>
+              <?php }?>
+            </div>
+            <div class="about">
+              <h4>
+                关于此模组
+              </h4> 
+              <div class="con">
+                {$moddata.desc|raw}
+              </div>
+            </div>
+            <div class="comments">
+              <h4>
+                评论区
+              </h4>
+              {volist name="comment" id="id" empty="暂时还没有评论"}
+              <div class="comments-card">
+                <div class="user-photo"><img src="{$id.userinfo.photo}" alt=""></div>
+                <div class="con">
+                  <div class="user-name">{$id.userinfo.name}</div>
+                  <div class="time">{$id.time}</div>
+                  <div class="text">
+                  {if condition="$id.com_id"}
+                  <div class="callout">
+                  <span class="user-name">{$id.fatherCom.userinfo.name}&nbsp;说</span>
+                  <div class="con">
+                    {$id.fatherCom.text}
+                  </div>
+                </div>
+                {/if}
+                  {$id.text}
+                  </div>
+                 <div class="text-right">
+                  <a href="{:url('mod',['id' => $moddata.id,'com'=>$id.id])}#comment"><span class="oi oi-chat"></span >&nbsp;回复</a>
+                </div>
+                  
+                </div>
+              </div>
+              {/volist}
+            </div>
+          </div>
+          <div class="box">
+            {if condition="$user_info"}
+            <form method="post" action="{:url("index/comment/post")}">
+              <div class="form-group">
+                <label for="comment">发送评论:</label>
+                <textarea class="form-control" rows="5" id="comment" name="comment" required></textarea>
+              </div>
+              <input type="hidden" name="id"  value="{$moddata["id"]}">
+              <input type="hidden" name="type" id="type" value="1">
+               <input type="hidden" name="com" id="com" value="{$com_id}">
+              {:token_field()}
+              <div class="form-group">
+                  <button type="submit" name="submit" class="btn btn-primary">发送</button>
+              </div>
+            </form>
+            {else }
+            你需要<a href="{:url("index/login/index")}">登录</a>才能发表回复
+            {/if}
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="box">
+            <h4>
+              模组信息
+            </h4>
+            <ul class="mod-info-list">
+              <li><span>文件大小</span>
+                <span>{:round($moddata.size/1024/1024,2)}MB</span>
+              </li>
+              <li><span>更新日期</span>
+                <span>{$moddata.time}</span>
+              </li>
+              <li><span>MD5</span>
+                <span>{$moddata.md5}</span>
+              </li>
+             <li>
+             <span>下载次数</span>
+               <span>{$moddata.download}次</span>
+              </li>
+              <li>
+              <span>模组来源</span>
+                {if condition="$moddata['copyright'] !== ''"}
+                <span>汉化搬运,<a href="{$moddata.copyright}" target="_blank">原地址</a></span>
+                {else}
+                <span>
+                作者原创
+                </span>
+                {/if}
+              </li>
+
+
+
+            </ul>
+          </div>
+          
+             <div class="box">
+            <h4>历史版本</h4>
+            <ul class="version">
+            {volist name="version" id="val"}
+              <li>
+                <span>{$val.version}</span>
+                <span>
+                  <a href="{:url('mod',['id'=>$val.id])}" class="btn text-white btn-primary btn-sm">查看</a>
+                </span>
+              </li>
+              {/volist}
+            </ul>
+          </div>
+          <div class="mods-box">
+            <div class="title d-flex justify-content-between ">
+              <h3>最新模组</h3>
+              <button type="button" class="btn btn-primary btn-sm"> 更多 </button>
+            </div>
+            <div class="row">
+             {volist name="$newMods" id="moddata"}
+              <div class="col-6">
+                <a class="mod-box" href="{:url("index/index/mod" ,["id" => $moddata.id])}">
+                  <div class="icon">
+                    <img src="{$moddata["icon"]}"  alt=""/>
+                  </div>
+                  <div  class="title">
+                    {$moddata["name"]}
+                  </div>
+                  <div class="info">
+                    {$moddata["absrtact"]}
+                  </div>
+                </a>
+              </div>
+              {/volist}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{/block}

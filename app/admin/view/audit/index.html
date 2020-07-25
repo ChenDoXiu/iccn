@@ -1,0 +1,70 @@
+{extend name="base/base" /}
+{block name="title"}
+后台-审核中心
+{/block}
+{block name="body"}
+<h3> 审核列表 </h3>
+ 
+      <div class="card mt-3">
+        <ul class="list list-group">
+        {volist name="article" id="art"}
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-8"><b>[文章]</b><b class="text-info">[ {$art.plateinfo.name} ]</b> {$art.title}</div>
+              <div class="col-md-4"><a href="{:url('index/index/article',['id' => $art.id])}">查看</a>
+              
+                <a href="{:url('approved',['type' => 'article','id' => $art.id])}">通过</a>
+                
+               
+                
+                <a onclick="$('#dislink').attr('action','{:url('dis',['id' => $art.id,'type' => 'article'])}');" class="text-danger" data-toggle="modal" data-target="#del">驳回</a>
+                
+              </div>
+            </div>
+          </li>  
+          {/volist}
+          {volist name="mods" id="val"}
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-8"><b>[模组]</b><b class="text-info">[ {$val.plateinfo.name} ]</b> {$val.name}</div>
+              <div class="col-md-4"><a href="{:url('index/index/mod',['id' => $val.id])}">查看</a>
+                <a href="{:url('approved',['type' => 'mod','id' => $val.id])}">通过</a>
+               <a onclick="$('#dislink').attr('action','{:url('dis',['id' => $val.id,'type' => 'mod'])}');" class="text-danger" data-toggle="modal" data-target="#del">驳回</a>
+              </div>
+            </div>
+          </li>  
+          {/volist}
+        </ul>
+      </div>
+      
+      
+     <div class="modal fade" id="del">
+  <div class="modal-dialog">
+    <div class="modal-content">
+ <form method="post" action="" id="dislink">
+      <!-- 模态框头部 -->
+      <div class="modal-header">
+        <h4 class="modal-title">驳回</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+ 
+      <!-- 模态框主体 -->
+      <div class="modal-body">
+        <div class="form-group">
+              <label for="dis">驳回原因</label>
+              <textarea required name="dis" class="form-control"></textarea>
+            </div>   
+      </div>
+ 
+      <!-- 模态框底部 -->
+      <div class="modal-footer">
+        <button class="btn btn-danger">确定驳回</button>
+        <button type="button"  class="btn btn-info" data-dismiss="modal">手滑了</button>
+      </div>
+ </form>
+    </div>
+  </div>
+</div>
+      
+      
+      {/block}

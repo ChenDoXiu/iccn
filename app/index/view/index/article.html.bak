@@ -1,0 +1,97 @@
+{extend name="base/base" /}
+{block name="title"}首页{/block}
+{block name="style"} <link rel="stylesheet" href="/static/css/article.css" type="text/css" media="screen" title="no title"
+        charset="utf-8"> {/block}
+{block name="body"}
+  <div class=" container pt-2">
+      <ol class="breadcrumb box">
+        <li class="breadcrumb-item"><a href="{:url("index/index/home")}">首页</a></li>
+        <li class="breadcrumb-item"><a href="{:url("plate")}">{$article.plateinfo.name}</a></li>
+        <li class="breadcrumb-item active">{$article.title}</li>
+      </ol>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="box con">
+            <div class="title">
+              <h2>{$article.title}</h2>
+              <span>发布者：{$article.userinfo.name}</span>
+              <span>阅读数量：{$article.read_num}</span>
+            </div>
+            <div class="text">
+              {$article.con|raw}
+            </div>
+            <div class="time">
+              <hr>
+              <span>发布日期：{$article.time}</span>
+            </div>
+            <div class="disc">
+              <h4>讨论</h4>
+              {volist name="comment" id="val" empty="暂时没有评论呢!"}
+              <div class="disc-card">
+                <div class="user">
+                  <div class="user-photo">
+                    <img src="{$val.userinfo.photo}" alt=""/>
+                  </div>
+                  <div class="user-info">
+                    <div class="uesr-name">{$val.userinfo.name}</div>
+                    <div class="time">{$val.time}</div>
+
+                  </div>
+                </div>
+                {if condition="$val.com_id"}
+                <div class="callout">
+                  <span class="user-name">{$val.fatherCom.userinfo.name}&nbsp;说</span>
+                  <div class="con">
+                    {$val.fatherCom.text}
+                  </div>
+                </div>
+                {/if}
+                <div class="user-text">
+                  {$val.text}
+                </div>
+                <div class="fun">
+                  <a href="{:url('article',['id' => $article.id,'com'=>$val.id])}#comment"><span class="oi oi-chat"></span >&nbsp;回复</a>
+                </div>
+              </div>
+              {/volist}
+            </div>
+
+          </div>
+          <div class="inputbox">
+            <h4>回复&评论</h4>
+            {if condition="$user_info"}
+            <form method="post" action="{:url("index/comment/post")}">
+              <div class="form-group">
+                <label for="comment">发送评论:</label>
+                <textarea class="form-control" rows="5" id="comment" name="comment" required></textarea>
+              </div>
+              <input type="hidden" name="id"  value="{$article.id}">
+              <input type="hidden" name="type" id="type" value="2">
+              <input type="hidden" name="com" id="com" value="{$com_id}">
+              {:token_field()}
+              <div class="form-group">
+                  <button type="submit" name="submit" class="btn btn-primary">发送</button>
+              </div>
+            </form>
+            {else }
+            你需要<a href="{:url("index/login/index")}">登录</a>才能发表回复
+            {/if}
+  
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="box recent">
+            <h4>最近话题</h4>
+            <div class="con">
+              {volist name="art_new" id ="val"}
+              <a href="{:url("index/index/article",["id" => $val.id])}">{$val.title}</a>
+              {/volist}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{/block}

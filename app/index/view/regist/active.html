@@ -1,0 +1,41 @@
+{extend name="base/base" /}
+{block name="title"}注册账户{/block}
+{block name="style"}    <link rel="stylesheet" href="css/login.css" type="text/css" media="screen" title="no title"
+        charset="utf-8"> {/block}
+{block name="body"}
+ <div class=" container pt-2">
+      <ol class="breadcrumb box">
+        <li class="breadcrumb-item">首页</li>
+        <li class="breadcrumb-item active">注册</li>
+      </ol>
+    </div>
+
+<div class="container">
+        <div class="box">
+          <h1>注册</h1>
+          <div class="login">
+            <form method="post"> 
+            <div class="form-group">
+                <label for="user">请输入你的用户名:</label>
+                <input type="text" name="user" class="form-control" id="user" required>
+              </div>
+              <div class="form-group">
+                <label for="pass">请输入你的密码:</label>
+                <input type="password" name="pw" class="form-control" id="pass" required>
+              </div>
+
+              <div class="form-group">
+                <label for="passre">请确认你的密码:</label>
+                <input type="password" name="pws" class="form-control" id="passre" required>
+              </div>
+
+              <br>
+              <div class="form-group">
+                <button type="submit" name="submit" class="btn btn-primary w-100">下一步</button>
+              </div>
+            </form>
+            已有账号？点击这里<a href="#">登录</a>
+          </div>
+        </div>
+      </div>
+{/block}

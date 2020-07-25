@@ -1,0 +1,63 @@
+{extend name="base/base"/}
+{block name="title"}
+后台-所有文章
+{/block}
+{block name="css"}
+<link rel="stylesheet" href="/ad_static/css/mod-all.css" type="text/css" media="screen" title="no title" charset="utf-8">
+{/block}
+{block name="body"}
+ <h3> 文章列表 </h3>
+      <div class="box">
+        <a {eq name="$state" value="1"} class="active"{/eq} href="{:url('index',['state' => 1])}">已发布</a>&nbsp;|
+        <a {eq name="$state" value="2"} class="active"{/eq} href="{:url('index',['state' => 2])}">审核中</a>&nbsp;
+      </div>
+ 
+      <div class="card">
+        <ul class="list list-group">
+        {volist name="$res" id="art"}
+          <li class="list-group-item">
+            <div class="row">
+              <div class="col-md-4"><b class="text-info">[ {$art.plateinfo.name} ]</b> {$art.title}</div>
+               <div class="col-md-4 text-muted">{$art.time} <b>{$art.userinfo.name}</b> 发布</div>
+              <div class="col-md-4">
+                <a href="{:url('edit',['id' => $art.id])}">编辑</a>
+                <a href="{:url('index/index/article',['id' => $art.id])}">查看</a>
+                 <a onclick="$('#dellink').attr('href','{:url('delete',['id' => $art.id])}');" class="text-danger" data-toggle="modal" data-target="#del">删除</a>
+              </div>
+            </div>
+          </li>  
+        {/volist}
+        </ul>
+      </div>
+      <div>
+  {$res|raw}
+      </div> 
+      </div>
+      
+          <!-- 模态框 -->
+<div class="modal fade" id="del">
+  <div class="modal-dialog">
+    <div class="modal-content">
+ 
+      <!-- 模态框头部 -->
+      <div class="modal-header">
+        <h4 class="modal-title">警告⚠</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+ 
+      <!-- 模态框主体 -->
+      <div class="modal-body">
+        确定删除吗？<br/>
+        此操作将会删除此文章，并且无法恢复
+      </div>
+ 
+      <!-- 模态框底部 -->
+      <div class="modal-footer">
+        <a href="" id="dellink"class="btn text-white btn-danger">确定删除</a>
+        <button type="button" class="btn btn-info" data-dismiss="modal">手滑了</button>
+      </div>
+ 
+    </div>
+  </div>
+</div>
+{/block}

@@ -1,0 +1,38 @@
+ {extend name="base/base-admin" /}
+{block name="title"}
+系统-META设置
+{/block}
+{block name="body"}
+<form method="post">
+ <h3>
+        邮件设置
+      </h3>
+      <div class="box">
+        <div class="form-group">
+          <label>SMTP服务器</label>
+          <input type="text" name="smtp" id="smtp" value="{$smtp}" class="form-control">
+        </div>        
+        <div class="form-group">
+          <label>SMTP端口</label>
+          <input class="form-control" type="text" name="port" id="port" value="{$port}">
+        </div>
+        <div class="form-group">
+          <label>发件人邮箱</label>
+          <input class="form-control" type="text" name="user" id="user" value="{$user}">
+        </div>
+        <div class="form-group">
+          <label>发件人密码</label>
+          <input class="form-control" type="text" name="pass" id="pass" value="{$pass}">
+        <div class="form-group">
+          <label>发件人地址</label>
+          <input class="form-control" type="text" name="mail" id="mail" value="{$mail}">
+        </div>
+        <div class="form-group">
+          <label>发件人名称</label>
+          <input class="form-control" type="text" name="name" id="name" value="{$name}">
+        </div>
+
+        <button type="submit" name="submit" class="btn btn-primary">提交</button>
+      </div>
+      </form>
+{/block}

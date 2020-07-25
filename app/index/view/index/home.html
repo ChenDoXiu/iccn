@@ -1,0 +1,74 @@
+{extend name="base/base" /}
+{block name="title"}{$option["site-title"]}-首页{/block}
+{block name="body"}
+<div class="banana" style="background-image:url({$option["banana-bg"]})">
+    <div class="black">
+        <div class="content">
+            <h3 class="mb-5 font-weight-bold">{$option["banana-title"]}</h3>
+            <p class="mb-5">{$option["banana-text"]}</p>
+            <a href="{$option["banana-url"]}"  class="btn btn-lg btn-secondary">查看详情</a>
+        </div>
+    </div>
+</div>
+
+
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <div class="mods-box">
+            <div class="title d-flex justify-content-between ">
+              <h3>最新模组</h3>
+              <a href="{:url("index/index/modlist")}"><button type="button" class="btn btn-primary btn-sm">更多</button></a>
+            </div>
+            <div class="row">
+           
+             {volist name="$mods" id="moddata"}
+              <div class="col-6 col-md-4 col-lg-3">
+                <a class="mod-box" href="{:url("mod" ,["id" => $moddata.id])}">
+                  <div class="icon">
+                    <img src="{$moddata["icon"]}"  alt=""/>
+                  </div>
+                  <div  class="title">
+                    {$moddata["name"]}
+                  </div>
+                  <div class="info">
+                    {$moddata["absrtact"]}
+                  </div>
+                </a>
+              </div>
+              {/volist}
+            </div>
+          </div>
+
+          <div class="article">
+            <div class="title d-flex justify-content-between ">
+              <h3>最新文章</h3>
+              <a href="{:url("index/index/artlist")}"><button type="button" class="btn btn-primary btn-sm">更多</button></a>
+            </div>
+            <div class="article-box">
+            {volist name="art" id="val"}
+            <a class="article-block" href="{:url("index/index/article",["id" => $val.id])}">
+                <div class="icon">
+                  <img src="{$val.cover}" alt=""/>
+                </div>
+                <div class="info">
+                  <div class="title">{$val.title}</div>
+                  <div class="con">{$val.absrtact}</div>
+                </div>
+              </a>
+            {/volist}
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div>
+
+
+
+
+
+
+
+
+{/block}

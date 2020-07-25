@@ -1,0 +1,90 @@
+{extend name="base/base" /}
+{block name="title"}
+前台-菜单
+{/block}
+{block name="body"}
+<form {if condition='isset($data)'}action="{:url('updatemenu',['id' => $data.id])}"  {else/}action="{:url('savemenu')}"  {/if} method="post" enctype="multipart/form-data">
+      <h3> 菜单 </h3>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <div class="box">
+            {if condition="isset($edit)"}
+          修改-{$data.name}
+          {else/}
+            添加
+          {/if}
+            <div class="form-group">
+              <label for="title">菜单名称</label>
+              <input type="text" class="form-control" id="title" name="title" required value="{if condition='isset($data)'}{$data.name}{/if}">
+            </div>           
+            <div class="form-group">
+              <label for="url">URL地址(指向站内板块情留空)</label>
+              <input type="text" class="form-control" id="url" name="url" value="{if condition='isset($data)'}{$data.url}{/if}">
+            </div>
+            
+            <div class="form-group">
+              <label for="plate">指向站内板块(当URL选项有内容时，此选项无效)</label>
+              <select name="plate" id="plate" class="form-control" >
+                 {volist name="plate" id="val"}
+                <option  {if condition="isset($data)"}
+                {if condition="$val.id == $data.pid"}selected{/if}
+                {/if} value="{$val.id}">{$val.name}</option>
+                {/volist}
+              </select>
+            </div>
+              {if condition='isset($data)'}
+              <button type="submit" name="submit" class="btn btn-primary">修改</button>
+              <a href="{:url('menu')}" class="btn">取消</a>
+              {else/}
+                <button type="submit" name="submit" class="btn btn-primary">添加</button>
+            {/if}
+          </div>
+          </form>
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <ul class="list-group list">
+              <li class="list-group-item">修改板块</li>
+               {volist name="list" id="val"}
+               <li class="list-group-item">
+                <div>{$val.name}</div>
+                <div>
+                  <a href="{:url('menu',['edit' => $val.id])}">修改</a>
+                  <a onclick="$('#dellink').attr('href','{:url('remove menu',['id' => $val.id])}');" class="text-danger" data-toggle="modal" data-target="#del">删除</a>
+                </div>
+              </li>
+              {/volist}
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      
+               <!-- 模态框 -->
+<div class="modal fade" id="del">
+  <div class="modal-dialog">
+    <div class="modal-content">
+ 
+      <!-- 模态框头部 -->
+      <div class="modal-header">
+        <h4 class="modal-title">警告⚠</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+ 
+      <!-- 模态框主体 -->
+      <div class="modal-body">
+        确定删除吗？<br/>
+        此操作将会删除此菜单，并且无法恢复
+      </div>
+ 
+      <!-- 模态框底部 -->
+      <div class="modal-footer">
+        <a href="" id="dellink"class="btn text-white btn-danger">确定删除</a>
+        <button type="button" class="btn btn-info" data-dismiss="modal">手滑了</button>
+      </div>
+ 
+    </div>
+  </div>
+</div>
+      
+{/block}

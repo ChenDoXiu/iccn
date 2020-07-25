@@ -1,0 +1,110 @@
+{extend name="base/base"/}
+{block name="title"}
+后台-所有文章
+{/block}
+{block name="css"}
+<link rel="stylesheet" href="/state/admin/css/mod-rel.css" type="text/css" media="screen" title="no title" charset="utf-8">
+{/block}
+{block name="body"}
+<h3> 模块管理 </h3>
+{if condition="!isset($edit)"}
+<form method="post" action="{:url('save')}">
+{else/}
+<form method="post" action="{:url('update',['id' => $edit])}">
+{/if}
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <div class="box">
+         {if condition="!isset($edit)"}
+添加板块
+{else/}
+修改板块
+{/if}
+            <div class="form-group">
+              <label for="name">板块名称</label>
+              <input type="text" class="form-control" id="name" name="name" value='{:full("name")}' required>
+            </div>           
+            <div class="form-group">
+              <label for="desc">板块描述</label>
+              <input type="text" class="form-control" id="desc" name="desc" value='{:full("desc")}' required>
+            </div>
+            <div class="form-group">
+              <label for="father">父板块</label>
+              <select name="father" id="father" class="form-control" >
+             <option value="0">无</option>
+              {volist name="$plate_list" id="val"}
+                <option value="{$val.id}" {if condition="full('father') == $val.id"}selected{/if} >{$val.name}</option>
+                {/volist}
+              </select>
+            </div>
+           <div class="form-group">
+              <label for="audit">发布需审核</label>
+              <select name="audit" id="audit" class="form-control" >
+                <option value="1"  {if condition="full('audit') == 1"}selected{/if} >是</option>
+                <option value="0"  {if condition="full('audit') == 0"}selected{/if} >否</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="type">板块类型</label>
+              <select name="type" id="type" class="form-control" >
+                <option value="0"  {if condition="full('type') == 0"}selected{/if} >文章板块</option>
+                <option value="1"  {if condition="full('type') == 1"}selected{/if} >文件板块</option>
+              </select>
+            </div>
+           
+          {if condition="!isset($edit)"}
+<button type="submit" class="btn btn-primary">添加</button>    
+{else/}
+<button type="submit" class="btn btn-primary">修改</button> 
+<a href="{:url('index')}" class="btn">取消</a>
+{/if}
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <ul class="list-group list">
+            
+              <li class="list-group-item">修改板块</li>
+ {volist name="$plate_list" id="val"}
+               <li class="list-group-item">
+                <div>{$val.name}</div>
+                <div>
+                  <a href="{:url('index',['edit' => $val.id])}">修改</a>
+                  <a onclick="$('#dellink').attr('href','{:url('delete',['id' => $val.id])}');" class="text-danger" data-toggle="modal" data-target="#del">删除</a>
+                </div>
+              </li>
+              {/volist}
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+      </form>
+      
+               <!-- 模态框 -->
+<div class="modal fade" id="del">
+  <div class="modal-dialog">
+    <div class="modal-content">
+ 
+      <!-- 模态框头部 -->
+      <div class="modal-header">
+        <h4 class="modal-title">警告⚠</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+ 
+      <!-- 模态框主体 -->
+      <div class="modal-body">
+        确定删除吗？<br/>
+        此操作将会删除此板块，并且无法恢复
+      </div>
+ 
+      <!-- 模态框底部 -->
+      <div class="modal-footer">
+        <a href="" id="dellink"class="btn text-white btn-danger">确定删除</a>
+        <button type="button" class="btn btn-info" data-dismiss="modal">手滑了</button>
+      </div>
+ 
+    </div>
+  </div>
+</div>
+      {/block}

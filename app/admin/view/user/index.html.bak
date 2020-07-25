@@ -1,0 +1,81 @@
+{extend name="base/base"/}
+{block name="title"}
+后台-用户中心
+{/block}
+{block name="css"}
+{block name="body"}
+<h3> 用户管理 </h3>
+      <div class="row">
+     
+        <div class="col-md-6 mb-3">
+          {if condition="!isset($edit)"}
+              <form action="{:url('save')}" method="post">
+          {else/}
+              <form method="post" action="{:url('update',['id' => $edit])}">
+          {/if}
+         
+          <div class="box">
+           {if condition="!isset($edit)"}
+添加用户
+{else/}
+修改用户
+{/if}
+
+            <div class="form-group">
+              <label for="user">用户名称</label>
+              <input type="text" class="form-control" id="user" name="user" autocomplete="off" value="{:full('user')}" required>
+             </div>           <div class="form-group">
+              <label for="mail">邮箱</label>
+              <input type="text" class="form-control" id="mail" name="mail" autocomplete="off" value="{:full('mail')}" required>
+            </div>                
+            <div class="form-group">
+              <label for="name">昵称（对外展示）</label>
+              <input type="text" class="form-control" id="name" name="name" autocomplete="off" value="{:full('name')}" >
+            </div>
+            <div class="form-group">
+              <label for="pw">
+                密码
+              </label>
+              <input type="password" name="pw" id="pw" value="" class="form-control" autocomplete="off" {if condition="!isset($edit)"}required{/if}>
+            </div>           
+            <div class="form-group">
+              <label for="pws">
+                确认密码
+              </label>
+              <input type="password" name="pws" id="pws" value="" class="form-control" autocomplete="off" {if condition="!isset($edit)"}required{/if}>
+            </div>
+            <div class="form-group">
+              <label for="auth">用户组</label>
+              <select name="auth" id="auth" class="form-control" >
+              {volist name="$auth_list" id="val"}
+                <option value="{$val.id}" {if condition="full('auth') == $val.id"}selected{/if}>{$val.title}</option>
+              {/volist}
+              </select>
+             
+            </div>
+           {if condition="!isset($edit)"}
+        <button type="submit" name="submit" class="btn btn-primary">添加</button>
+{else/}
+ <button type="submit" name="submit" class="btn btn-primary">修改</button>
+{/if}
+             
+          </div>
+          </form>
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <ul class="list-group list">
+              <li class="list-group-item">编辑用户</li>
+              {volist name="$user" id="val"}
+               <li class="list-group-item">
+                <div>{$val.user} - {$val.name} - {$val.mail}</div>
+                <div>
+                  <a href="{:url('index',['edit' => $val.id])}">修改</a>
+                </div>
+              </li>
+              {/volist}
+            </ul>
+          </div>
+        </div>
+      </div>
+{/block}

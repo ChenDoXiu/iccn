@@ -1,0 +1,36 @@
+{extend name="base/base" /}
+{block name="title"}
+前台-banana
+{/block}
+{block name="body"}
+<h3> banana设置 </h3>
+<form method="post" action="{:url('bananaupdate')}" enctype="multipart/form-data">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <div class="box">
+          修改
+            <div class="form-group">
+              <label for="title">标题</label>
+              <input type="text" class="form-control" id="title" name="title" autocomplete="off" required value="{if condition='isset($data)'}{$data.title}{/if}">
+             </div>           
+             <div class="form-group">
+              <label for="text">正文</label>
+              <textarea name="text" id="text" class="form-control" rows='5' required>{$data.text}</textarea>
+            </div>                
+            <div class="form-group">
+              <label for="background">背景图像</label>
+              <input type="file" name="bg" id="background" accept="image/png,image/jpeg,image/gif" {if condition='!isset($data)'}required{/if}>
+              {if condition='isset($data)'}
+              <img width="200px" src="{$data.bg}"/>
+              {/if}
+            </div>
+             <div class="form-group">
+              <label for="url">指向链接</label>
+              <input type="text" class="form-control" id="url" name="url" autocomplete="off" required value="{if condition='isset($data)'}{$data.url}{/if}">
+              <button type="submit" name="submit" class="btn btn-primary">修改</button>
+            
+          </div>
+        </div>
+      </div>
+      </form>
+      {/block}
