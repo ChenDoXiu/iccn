@@ -1,0 +1,90 @@
+.con .title{
+    margin-bottom: 15px;
+}
+.con .title h2{
+    font-weight: 800;
+}
+.con .title span{
+    font-size:.8rem;
+    padding-right: 10px;
+    color: #666;
+}
+.con .time span{
+    display: block;
+    text-align: right;
+    color: rgb(102, 102, 102);
+    font-size: .8rem;
+}
+
+
+.con .time hr{
+    margin:15px 0px 5px 0px;;
+}
+.con .disc{
+    margin: 30px 0px;
+}
+.disc-card {
+    margin-bottom: 35px;   
+}
+.disc-card .user{
+    display: flex;
+    margin-bottom: 10px;
+}
+.disc-card .user-info .user-name {
+    font-size: 1rem;
+}
+.disc-card .user .user-info .time {
+    color: rgb(102, 102, 102);
+    font-size: .8rem;
+}
+.disc-card .user .user-photo{
+    width:50px;
+    height: 50px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 50%;
+    box-shadow: 0px 2px 3px rgba(0,0,0,0.3);
+    margin-right: 10px;
+}
+.disc-card .user .user-photo img{
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.disc-card .fun{
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+.disc-card .fun a{
+    padding: 0px 10px;;
+}
+.callout{
+    font-size: .8rem;
+    box-shadow: 0px 0.04rem 2px rgba(0,0,0,.3);
+    padding: 10px;
+    border-left: 6px solid orange;
+}
+.callout .user-name{
+    color: orange;
+}
+.callout .con{
+    margin-top: 10px
+}
+.inputbox{
+    background-color: #fff;
+    box-shadow: 0px 2px 3px rgba(0,0,0,0.3);
+    padding: 15px;
+    border-radius: 3px;
+    margin-bottom: 15px;
+}
+.inputbox .textarea{
+    opacity: 0;
+}
+.recent .con a{
+    display: block;
+    padding-bottom: 2px;
+    color: #333;
+    
+}

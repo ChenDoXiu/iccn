@@ -1,0 +1,20 @@
+.head{
+    position: relative;
+    margin-bottom: 15px; 
+    background-size: cover;
+}
+.head .con{
+    background-color: rgba(0,0,0,0.7);
+    text-align: center;
+    color: #fff;
+    padding:50px 25px;;
+}
+.head .con .icon{
+    text-align: center;
+    margin: 15px auto;
+    width: 100px;
+    height:100px;
+}
+.head .con .icon img{
+    /* width:100%; */
+}

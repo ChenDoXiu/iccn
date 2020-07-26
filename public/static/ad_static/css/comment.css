@@ -1,0 +1,16 @@
+.icon {
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+}
+.icon img{
+
+    width: 100%;
+}
+.mail{
+    color: #666;
+    font-size: .8rem;
+}
+.cmd a{
+    font-size: .9rem;
+}

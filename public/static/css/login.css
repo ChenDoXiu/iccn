@@ -1,0 +1,9 @@
+.box h1{
+    text-align: center;
+}
+.box .login{
+    position: relative;;
+    max-width: 400px;
+    left: 50%;
+    transform: translateX(-50%);
+}
